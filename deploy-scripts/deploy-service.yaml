@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-passwd-backend
+  namespace: mk-common-dev
+  labels:
+    app: my-passwd-backend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: my-passwd-backend
+  minReadySeconds: 45
+  template:
+    metadata:
+      labels:
+        app: my-passwd-backend
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: my-passwd-backend
+          image: 192.168.1.6:32500/my-passwd-backend:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 2G
+            requests:
+              memory: 512Mi
+          ports:
+            - containerPort: 8089
+          env:
+            - name: NACOS_SERVER_HOST
+              value: "xiaoma-nacos"
+            - name: NACOS_SERVER_PORT
+              value: "8848"
+            - name: NACOS_CONFIG_GROUP
+              value: "mk-common-dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-passwd-backend
+  namespace: mk-common-dev
+spec:
+  selector:
+    app: my-passwd-backend
+  ports:
+    - port: 8089
+      targetPort: 8089
+      name: server
