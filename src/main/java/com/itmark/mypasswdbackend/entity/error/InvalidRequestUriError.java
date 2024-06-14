@@ -15,6 +15,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class InvalidRequestUriError extends Exception{
+public class InvalidRequestUriError extends RuntimeException{
+
+    /**
+     * 自定义异常信息
+     */
     private String message;
+
 }

@@ -6,16 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * @Description:
- * @Author: 马宽
- * @Date: 2022/9/3 22:28
+ * @description:
+ * @author: MAKUAN
+ * @date: 2024/6/15 7:50
  */
 
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogintTokenError extends RuntimeException{
+public class MyUsernameNotFoundException  extends RuntimeException{
 
     /**
      * 自定义异常信息
