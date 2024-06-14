@@ -23,6 +23,11 @@ spring:
     username: my_passwd
     password: my_passwd
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 192.168.1.6
+    port: 16379
+    password: 111111
+    database: 0
   flyway:
     # flyway自动配置 true 开启
     enabled: false
@@ -37,5 +42,11 @@ spring:
     # 迁移时是否进行校验，默认true Migration checksum mismatch
     validate-on-migrate: false
     # 版本控制日志表，默认flyway_schema_history,不同系统建议修改改数据
-    table: flyway_schema_history    
+    table: flyway_schema_history
+
+
+
+#设置令牌加密盐
+jwt:
+  secret: markblog       
 ```
