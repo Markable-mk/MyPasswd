@@ -3,7 +3,7 @@ A PASSWORD MANAGE SYSTEM.
 # 初始化
 ## 1 数据库创建
 ``` sql
-CREATE DATABASE my_passwd;
+CREATE DATABASE my_passwd CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE USER 'my_passwd'@'%' IDENTIFIED BY 'my_passwd';
 grant ALL on my_passwd.* to 'my_passwd'@'%';
 ```
