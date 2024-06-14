@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class MyLoginUser implements UserDetails {
 
-    private User user;
+    private MarkUser user;
 
     private List<String> permissions;
 

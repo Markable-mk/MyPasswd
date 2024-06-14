@@ -2,7 +2,7 @@ package com.itmark.mypasswdbackend.service.security;
 
 
 import com.itmark.mypasswdbackend.entity.sso.MyLoginUser;
-import com.itmark.mypasswdbackend.entity.sso.User;
+import com.itmark.mypasswdbackend.entity.sso.MarkUser;
 import com.itmark.mypasswdbackend.mapper.sso.UserDetailsMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -38,7 +38,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //1.根据用户名去查询用户密码和加密验
-        User user = userDetailsMapper.selUserByUserName(username);
+        MarkUser user = userDetailsMapper.selUserByUserName(username);
         if (Objects.isNull(user)){
             //2.该提示可以防止测试用户不存在
             // throw new UsernameNotFoundException("用户名或密码错误！-SERCURITY-USERDETAILS"); -- AuthenticationEntryPoint 感知不到 需要使用RuntimeException

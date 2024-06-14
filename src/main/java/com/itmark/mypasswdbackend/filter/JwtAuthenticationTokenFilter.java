@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.itmark.mypasswdbackend.anno.NoNeedAuthorization;
 import com.itmark.mypasswdbackend.consts.SysConstant;
 import com.itmark.mypasswdbackend.entity.sso.MyLoginUser;
-import com.itmark.mypasswdbackend.entity.sso.User;
+import com.itmark.mypasswdbackend.entity.sso.MarkUser;
 import com.itmark.mypasswdbackend.enums.RequestMethodEnum;
 import com.itmark.mypasswdbackend.mapper.sso.UserDetailsMapper;
 import com.itmark.mypasswdbackend.util.web.IpUtil;
@@ -151,7 +151,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         JWTPayload payload = jwt.getPayload();
         String sid = String.valueOf(payload.getClaim("id"));
         // 4逻辑4：查询缓存或者数据库中的用户信息权限信息
-        User user = userDetailsMapper.selUserByUserId(Long.parseLong(sid));
+        MarkUser user = userDetailsMapper.selUserByUserId(Long.parseLong(sid));
         // 判断用户是否为null
         if (Objects.isNull(user)){
             httpServletRequest.setAttribute("errorCode", "TOKEN_EXPIRED");

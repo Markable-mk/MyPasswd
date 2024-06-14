@@ -16,13 +16,16 @@ import java.util.List;
  */
 @Data
 @TableName("MK_USER")
-public class User implements Serializable {
+public class MarkUser implements Serializable {
     @TableId("USER_ID")
     private Long userId;
     @TableField("USER_NAME")
     private String userName;
     @TableField("UER_PASSWORD")
     private String userPassword;
+    /**
+     * 加密盐
+     */
     @JsonIgnore
     @TableField("USER_SALT")
     private String userSalt;
@@ -32,6 +35,8 @@ public class User implements Serializable {
     @TableField("USER_QQ")
     private Boolean userQQ;
     @JsonIgnore
-    // 用户菜单（接口）权限列表
+    /**
+     * 用户菜单（接口）权限列表
+     */
     private List<String> permitMenuList;
 }

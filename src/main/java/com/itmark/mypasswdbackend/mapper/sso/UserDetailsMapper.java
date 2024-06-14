@@ -1,6 +1,6 @@
 package com.itmark.mypasswdbackend.mapper.sso;
 
-import com.itmark.mypasswdbackend.entity.sso.User;
+import com.itmark.mypasswdbackend.entity.sso.MarkUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,11 +13,17 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserDetailsMapper {
     /**
-     * 选取用户用户名
+     * 01选取用户用户名
      *
      * @param userName 用户名
-     * @return {@link User}
+     * @return {@link MarkUser}
      */
-    User selUserByUserName(@Param("userName") String userName);
-    User selUserByUserId(@Param("userId") Long userId);
+    MarkUser selUserByUserName(@Param("userName") String userName);
+
+    /**
+     * 02通过用户ID查询用户
+     * @param userId
+     * @return
+     */
+    MarkUser selUserByUserId(@Param("userId") Long userId);
 }
