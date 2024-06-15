@@ -150,7 +150,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         anonymousUrls.put(RequestMethodEnum.DELETE.getType(), delete);
         anonymousUrls.put(RequestMethodEnum.ALL.getType(), all);
         String jsonStringMap = JSON.toJSONString(anonymousUrls);
-        // redisTemplate.opsForValue().set(SysConstant.ANONYMOUSURLS_KEY,jsonStringMap);
+        redisTemplate.opsForValue().set(SysConstant.ANONYMOUSURLS_KEY,jsonStringMap);
         return anonymousUrls;
     }
 

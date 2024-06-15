@@ -15,10 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class MyAuthenticationEntryPointImpl implements AuthenticationEntryPoint {
 
+    /**
+     * 触发实时机1：密码对比失败、用户名没有找到
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @param e
+     */
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e)  {
-        log.info("捕获到认证异常：{}",e.getMessage());
-        MarkAppRespEntity<String> message = MarkAppRespEntity.alert("").status(40001).message("用户认证失败请重新登录-SECURITY-AUTHENTICATIONENTRYPOINT");
+        log.info("自定义认证失败处理器捕获到认证异常：{}",e.getMessage());
+        MarkAppRespEntity<String> message = MarkAppRespEntity.alert("").status(40001).message(e.getMessage());
         // 提示授权失败
         WebUtils.renderString(httpServletResponse, JSON.toJSONString(message));
     }

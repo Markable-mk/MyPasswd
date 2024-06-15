@@ -5,6 +5,7 @@ import com.itmark.mypasswdbackend.entity.error.MyUsernameNotFoundException;
 import com.itmark.mypasswdbackend.entity.sso.MyLoginUser;
 import com.itmark.mypasswdbackend.entity.sso.MarkUser;
 import com.itmark.mypasswdbackend.mapper.sso.UserDetailsMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,7 @@ import java.util.Objects;
  * @author xiaoma
  * @date 2023/05/14
  */
+@Slf4j
 @Service
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
@@ -43,7 +45,8 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)){
             //2.该提示可以防止测试用户不存在
             // throw new UsernameNotFoundException("用户名或密码错误！-SERCURITY-USERDETAILS"); -- AuthenticationEntryPoint 感知不到 需要使用RuntimeException
-            throw new MyUsernameNotFoundException("用户名或密码错误！-SERCURITY-USERDETAILS");
+            log.warn("MyUserDetailsServiceImpl自定义异常触发：用户名或密码错误！");
+            throw new MyUsernameNotFoundException("用户名或密码错误！");
         }
         // 3.查询权限 该步骤省略，这里不需要查，只用于颁发token,权限在过滤器中进行了查询
         //UserDetails

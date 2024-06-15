@@ -70,4 +70,6 @@ public interface SysConstant {
      * 请求响应体内容
      */
     String RESP_DATA_KEY = "data";
+
+    String KEY_ID="id";
 }
