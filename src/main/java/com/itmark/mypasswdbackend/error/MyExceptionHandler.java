@@ -1,6 +1,7 @@
 package com.itmark.mypasswdbackend.error;
 
 import com.itmark.mypasswdbackend.entity.error.InvalidRequestUriError;
+import com.itmark.mypasswdbackend.entity.error.UserNameOrPasswdNotRightError;
 import com.itmark.mypasswdbackend.entity.error.LogintTokenError;
 import com.itmark.mypasswdbackend.entity.resp.MarkAppRespEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -52,4 +53,14 @@ public class MyExceptionHandler {
         //3.返回通用格式
         return MarkAppRespEntity.error().status(60001).message("访问存在安全风险，系统限制访问此类型资源");
     }
+
+
+    @ExceptionHandler(UserNameOrPasswdNotRightError.class)
+    @ResponseBody
+    public MarkAppRespEntity myExceptionHandler4(Exception e) {
+        //3.返回通用格式
+        return MarkAppRespEntity.error().status(40001).message("用户名或者密码不正确，请检查！");
+    }
+
+
 }

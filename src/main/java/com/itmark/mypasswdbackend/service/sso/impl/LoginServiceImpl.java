@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,12 +51,17 @@ public class LoginServiceImpl implements LoginService {
     public String login(MarkUser user) {
         //1获取AuthenticationManager（接口） ProviderManager（实现类）authenticate方法进行认证
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getUserPassword());
-        Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        //2认证不通过抛出异常给出提示(没啥用)已经在上一步验证并抛出异常了
-        MyLoginUser myLoginUser = (MyLoginUser) authenticate.getPrincipal();
+        MyLoginUser myLoginUser = null;
+        try {
+            Authentication authenticate = authenticationManager.authenticate(authenticationToken);
+            //2认证不通过抛出异常给出提示(没啥用)已经在上一步验证并抛出异常了
+            myLoginUser = (MyLoginUser) authenticate.getPrincipal();
+        } catch (AuthenticationException e) {
+            throw new UsernameNotFoundException("用户名或密码错误！请检查！");
+        }
         if (Objects.isNull(myLoginUser)){
             //2.该提示可以防止测试用户不存在
-            throw new UsernameNotFoundException("用户名或密码错误！");
+            throw new UsernameNotFoundException("用户名或密码错误！请检查！");
         }
         //2认证通过返回jwt
         DateTime now = DateTime.now();

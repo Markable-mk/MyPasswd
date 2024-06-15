@@ -67,7 +67,7 @@ public class SecurityController {
         return MarkAppRespEntity.success(user).message("获取用户信息成功");
     }
 
-    @NoNeedAuthorization
+    // @NoNeedAuthorization
     @GetMapping("/mockBCryptPasswordEncoder")
     public MarkAppRespEntity<String> mockBCryptPasswordEncoder(@RequestParam(name = "mockPass")String mockPass){
         String mock=loginService.mockBCryptPasswordEncoder(mockPass);

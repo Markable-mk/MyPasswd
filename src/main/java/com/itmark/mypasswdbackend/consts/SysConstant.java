@@ -72,4 +72,12 @@ public interface SysConstant {
     String RESP_DATA_KEY = "data";
 
     String KEY_ID="id";
+    /**
+     * 描述
+     */
+    String KEY_DESC="desc";
+    /**
+     * code
+     */
+    String KEY_CODE="code";
 }

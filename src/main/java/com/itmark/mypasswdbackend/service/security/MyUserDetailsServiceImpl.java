@@ -1,7 +1,7 @@
 package com.itmark.mypasswdbackend.service.security;
 
 
-import com.itmark.mypasswdbackend.entity.error.MyUsernameNotFoundException;
+import com.itmark.mypasswdbackend.entity.error.UserNameOrPasswdNotRightError;
 import com.itmark.mypasswdbackend.entity.sso.MyLoginUser;
 import com.itmark.mypasswdbackend.entity.sso.MarkUser;
 import com.itmark.mypasswdbackend.mapper.sso.UserDetailsMapper;
@@ -45,8 +45,8 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         if (Objects.isNull(user)){
             //2.该提示可以防止测试用户不存在
             // throw new UsernameNotFoundException("用户名或密码错误！-SERCURITY-USERDETAILS"); -- AuthenticationEntryPoint 感知不到 需要使用RuntimeException
-            log.warn("MyUserDetailsServiceImpl自定义异常触发：用户名或密码错误！");
-            throw new MyUsernameNotFoundException("用户名或密码错误！");
+            log.warn("MyUserDetailsServiceImpl自定义异常触发：根据用户名没有找到用户，警惕撞库！");
+            throw new UserNameOrPasswdNotRightError("用户名或者密码不正确，请检查！");
         }
         // 3.查询权限 该步骤省略，这里不需要查，只用于颁发token,权限在过滤器中进行了查询
         //UserDetails
