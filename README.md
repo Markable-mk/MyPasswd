@@ -33,7 +33,7 @@ spring:
     enabled: false
     #设定 SQL 脚本的目录,多个路径使用逗号分隔, 比如取值为 classpath:db/migration,filesystem:/sql-migrations
     locations:
-      - classpath:db/migration
+      - classpath:mysql/migration
     # 如果数据库不是空表，需要设置成 true，否则启动报错
     baseline-on-migrate: true
     # 与 baseline-on-migrate: true 搭配使用
