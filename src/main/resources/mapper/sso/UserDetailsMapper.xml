@@ -36,7 +36,7 @@
 
     <select id="selectPermitMenuList" resultType="string">
         SELECT
-        UM.URI
+        UM.URI_CODE
         FROM
             MARK_USER U LEFT JOIN
         MARK_USER_ROLE UR
@@ -54,7 +54,7 @@
         ON UM.MENU_ID = RM.MENU_ID
         WHERE
         U.USER_ID =  #{userIdNewSql} AND
-        UM.URI IS NOT NULL
+        UM.URI_CODE IS NOT NULL
     </select>
 </mapper>
 

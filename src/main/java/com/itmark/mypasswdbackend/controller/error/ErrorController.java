@@ -22,6 +22,9 @@ public class ErrorController {
     public void loginAuthFail(HttpServletRequest request) throws Exception {
         // 此处构造一个合适的异常并抛出即可
         String errorCode = (String)request.getAttribute("errorCode");
+        if (errorCode.equals("TOKEN_NOT_EXISTS")){
+            throw new LogintTokenError("请先进行登录！");
+        }
         if (errorCode.equals("TOKEN_EXPIRED")){
             throw new LogintTokenError("您的登录信息已过期请重新登录");
         }

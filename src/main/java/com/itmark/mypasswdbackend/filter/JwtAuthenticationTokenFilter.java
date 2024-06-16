@@ -130,7 +130,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         // 2逻辑二：对于没有token的请求，前面又不再匿名请求路径内，这里应该给出提示去进行登陆
         if (StringUtils.isEmpty(token)){
-            httpServletRequest.setAttribute("errorCode", "TOKEN_EXPIRED");
+            httpServletRequest.setAttribute("errorCode", "TOKEN_NOT_EXISTS");
             httpServletRequest.getRequestDispatcher("/error/login-auth-fail").forward(httpServletRequest, httpServletResponse);
             return;
         }
