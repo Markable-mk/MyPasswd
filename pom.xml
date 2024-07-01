@@ -24,13 +24,19 @@
         <freemarker.version>2.3.30</freemarker.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <lombok.version>1.18.16</lombok.version>
+        <liteflow.version>2.12.1</liteflow.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.xuxueli</groupId>
-            <artifactId>xxl-job-core</artifactId>
-            <version>2.3.1</version>
+            <groupId>com.yomahub</groupId>
+            <artifactId>liteflow-spring-boot-starter</artifactId>
+            <version>${liteflow.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.xuxueli</groupId>-->
+<!--            <artifactId>xxl-job-core</artifactId>-->
+<!--            <version>2.3.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>

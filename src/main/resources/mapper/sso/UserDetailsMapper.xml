@@ -39,7 +39,7 @@
         UM.URI_CODE
         FROM
             MARK_USER U LEFT JOIN
-        MARK_USER_ROLE UR
+            MARK_USER_ROLE_RELA UR
         ON U.USER_ID = UR.USER_ID
         LEFT JOIN
         MARK_ROLE R
