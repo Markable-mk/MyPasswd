@@ -25,8 +25,16 @@
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <lombok.version>1.18.16</lombok.version>
         <liteflow.version>2.12.1</liteflow.version>
+        <socketio.version>1.7.19</socketio.version>
     </properties>
     <dependencies>
+        <!--socket-->
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>${socketio.version}</version>
+        </dependency>
+        <!--规则引擎减少if else-->
         <dependency>
             <groupId>com.yomahub</groupId>
             <artifactId>liteflow-spring-boot-starter</artifactId>
