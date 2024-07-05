@@ -15,22 +15,22 @@ server:
   max-http-header-size: 16384
 spring:
   application:
-    name: MyPasswdBackend
+    name: my-passwd-backend
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: defaultDataSource
-    url: jdbc:mysql://192.168.1.6:13308/my_passwd?serverTimezone=PRC&characterEncoding=UTF-8&rewriteBatchedStatements=true&useSSL=false&allowMultiQueries=true
-    username: my_passwd
-    password: my_passwd
+    url: jdbc:mysql://192.168.9.22:13308/my_passwd?serverTimezone=PRC&characterEncoding=UTF-8&rewriteBatchedStatements=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
-    host: 192.168.1.6
+    host: 192.168.9.22
     port: 16379
     password: 111111
     database: 0
   flyway:
     # flyway自动配置 true 开启
-    enabled: false
+    enabled: true
     #设定 SQL 脚本的目录,多个路径使用逗号分隔, 比如取值为 classpath:db/migration,filesystem:/sql-migrations
     locations:
       - classpath:mysql/migration
@@ -43,10 +43,16 @@ spring:
     validate-on-migrate: false
     # 版本控制日志表，默认flyway_schema_history,不同系统建议修改改数据
     table: flyway_schema_history
-
+minio:
+  # url地址
+  url: http://192.168.9.22:19000
+  # 用户名
+  username: minio123456
+  # 密码
+  password: minio123456
 
 
 #设置令牌加密盐
 jwt:
-  secret: markblog       
+  secret: markblog  
 ```
