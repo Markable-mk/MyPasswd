@@ -3,18 +3,14 @@ package com.itmark.mypasswdbackend.service.minio.impl;
 import com.itmark.mypasswdbackend.service.minio.MinioService;
 import io.minio.MinioClient;
 import io.minio.Result;
-import io.minio.errors.*;
 import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
