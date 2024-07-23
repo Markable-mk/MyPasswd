@@ -71,4 +71,42 @@ public class MinioServiceImpl implements MinioService {
         }
         return result;
     }
+
+    @Override
+    public Boolean existBucket(String bucketName) {
+        boolean exists;
+        try {
+            exists = minioClient.bucketExists(bucketName);
+            if (!exists) {
+                minioClient.makeBucket(bucketName);
+                exists = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            exists = false;
+        }
+        return exists;
+    }
+
+    @Override
+    public Boolean makeBucket(String bucketName) {
+        try {
+            minioClient.makeBucket(bucketName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean removeBucket(String bucketName) {
+        try {
+            minioClient.removeBucket(bucketName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

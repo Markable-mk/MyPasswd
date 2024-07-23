@@ -34,4 +34,25 @@ public interface MinioService {
      * @return
      */
     Map<String,String> getFilesShareLinkMap(String bucketName,List<String> filePathWithBucketList);
+
+    /**
+     * 04 校验桶是否存在
+     * @param bucketName
+     * @return
+     */
+    Boolean existBucket(String bucketName);
+
+    /**
+     * 05 创建桶
+     * @param bucketName
+     * @return
+     */
+    Boolean makeBucket(String bucketName);
+
+    /**
+     * 06 删除桶
+     * @param bucketName
+     * @return
+     */
+    Boolean removeBucket(String bucketName);
 }
