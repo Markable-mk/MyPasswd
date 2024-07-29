@@ -63,12 +63,8 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
           tags: |
-            registry.cn-hangzhou.aliyuncs.com/mk-dev/big-app:latest    
+            registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest  
 
-      - name: 7 Tag image for Alibaba Cloud
-        run: |
-          docker tag registry.cn-hangzhou.aliyuncs.com/mk-dev/big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
-
-      - name: 8 Push to Alibaba Cloud Container Registry
+      - name: 7 Push to Alibaba Cloud Container Registry
         run: |
           docker push registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
