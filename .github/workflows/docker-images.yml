@@ -34,7 +34,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: registry.cn-hangzhou.aliyuncs.com
-          username: ${{ secrets.ALIYUN_REGISTRY_USER }}
+          username: ${{ vars.ALIYUN_REGISTRY_USER }}
           password: ${{ secrets.ALIYUN_REGISTRY_PWD }}
 
       - name: 6 Build and push
