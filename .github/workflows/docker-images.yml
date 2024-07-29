@@ -36,6 +36,7 @@ jobs:
           dockerName: ${{ vars.ALIYUN_REGISTRY_USER }}
           dockerPasswd: ${{ secrets.ALIYUN_REGISTRY_PWD }}
         run: |
+          ls -alh
           echo "ALIYUN_REGISTRY_USER: $dockerName"   
           echo "ALIYUN_REGISTRY_PWD: $dockerPasswd"
           echo "HELLO_STRING 逗你玩: $HELLO_STRING"
