@@ -65,10 +65,10 @@ jobs:
           tags: |
             registry.cn-hangzhou.aliyuncs.com/mk-dev/big-app:latest    
 
-#      - name: 7 Tag image for Alibaba Cloud
-#        run: |
-#          docker tag big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
+      - name: 7 Tag image for Alibaba Cloud
+        run: |
+          docker tag registry.cn-hangzhou.aliyuncs.com/mk-dev/big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
 
-      - name: 7 Push to Alibaba Cloud Container Registry
+      - name: 8 Push to Alibaba Cloud Container Registry
         run: |
           docker push registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
