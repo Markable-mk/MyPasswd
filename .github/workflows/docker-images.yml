@@ -10,6 +10,7 @@ jobs:
     env:
       MY_DOCKER_NAME: ${{ vars.ALIYUN_REGISTRY_USER }}
       MY_DOCKER_PWD: ${{ secrets.ALIYUN_REGISTRY_PWD }}
+      HELLO_STRING: HELLO HHH
     steps:
       - name: 1 Checkout code
         uses: actions/checkout@v4
@@ -36,6 +37,7 @@ jobs:
         run: |
           echo "ALIYUN_REGISTRY_USER: ${{ env.MY_DOCKER_NAME }}"   
           echo "ALIYUN_REGISTRY_PWD: ${{ env.MY_DOCKER_PWD }}"
+          echo "HELLO_STRING 逗你玩: ${{ env.HELLO_STRING }}"
 
       - name: 5 Login to DockerAlibaba
         uses: docker/login-action@v2
