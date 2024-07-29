@@ -33,11 +33,11 @@ jobs:
 
       - name: Debug Secrets
         env:
-          MY_DOCKER_NAME: ${{ vars.ALIYUN_REGISTRY_USER }}
-          MY_DOCKER_PWD: ${{ secrets.ALIYUN_REGISTRY_PWD }}
+          dockerName: ${{ vars.ALIYUN_REGISTRY_USER }}
+          dockerPasswd: ${{ secrets.ALIYUN_REGISTRY_PWD }}
         run: |
-          echo "ALIYUN_REGISTRY_USER: $MY_DOCKER_NAME"   
-          echo "ALIYUN_REGISTRY_PWD: $MY_DOCKER_PWD"
+          echo "ALIYUN_REGISTRY_USER: $dockerName"   
+          echo "ALIYUN_REGISTRY_PWD: $dockerPasswd"
           echo "HELLO_STRING 逗你玩: $HELLO_STRING"
 
       - name: 5 Login to DockerAlibaba
