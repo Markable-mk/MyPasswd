@@ -63,7 +63,9 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
           tags: |
-            registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest  
+            registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
+          build-args: |
+            JAR_FILE=./target/MyPasswdBackend-0.0.1-SNAPSHOT.jar
 
       - name: 7 Push to Alibaba Cloud Container Registry
         run: |
