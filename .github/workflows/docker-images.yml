@@ -8,8 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MY_DOCKER_NAME: ${{ vars.ALIYUN_REGISTRY_USER }}
-      MY_DOCKER_PWD: ${{ secrets.ALIYUN_REGISTRY_PWD }}
       HELLO_STRING: HELLO HHH
     steps:
       - name: 1 Checkout code
@@ -34,12 +32,18 @@ jobs:
           mvn clean package -Dmaven.test.skip=true
 
       - name: Debug Secrets
+        env:
+          MY_DOCKER_NAME: ${{ vars.ALIYUN_REGISTRY_USER }}
+          MY_DOCKER_PWD: ${{ secrets.ALIYUN_REGISTRY_PWD }}
         run: |
           echo "ALIYUN_REGISTRY_USER: $MY_DOCKER_NAME"   
           echo "ALIYUN_REGISTRY_PWD: $MY_DOCKER_PWD"
           echo "HELLO_STRING 逗你玩: $HELLO_STRING"
 
       - name: 5 Login to DockerAlibaba
+        env:
+          MY_DOCKER_NAME: ${{ vars.ALIYUN_REGISTRY_USER }}
+          MY_DOCKER_PWD: ${{ secrets.ALIYUN_REGISTRY_PWD }}
         uses: docker/login-action@v2
         with:
           registry: registry.cn-hangzhou.aliyuncs.com
