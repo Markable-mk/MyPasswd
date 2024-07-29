@@ -1,0 +1,56 @@
+name: Mvn Build and Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 2 Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: 3 Dependies Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: 4 Build with Maven
+        run: |
+          mvn clean package -Dmaven.test.skip=true
+
+      - name: 5 Login to DockerAlibaba
+        run: |
+          docker login --username=${{ secrets.ALIYUN_REGISTRY_USER }} --password=${{ secrets.ALIYUN_REGISTRY_PWD }} registry.cn-hangzhou.aliyuncs.com
+
+      - name: 6 Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./MyPasswdBackend/ActionDockerfile
+          # 所需要的体系结构，可以在 Available platforms 步骤中获取所有的可用架构 https://docs.docker.com/build/building/multi-platform/
+          platforms: linux/amd64
+          # 镜像推送时间
+          push: ${{ github.event_name != 'pull_request' }}
+          # 给清单打上多个标签
+          tags: |
+            big-app:latest    
+
+      - name: 7 Tag image for Alibaba Cloud
+        run: |
+          docker tag big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
+
+      - name: 8 Push to Alibaba Cloud Container Registry
+        run: |
+          docker push registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
