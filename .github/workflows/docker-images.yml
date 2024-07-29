@@ -31,8 +31,11 @@ jobs:
           mvn clean package -Dmaven.test.skip=true
 
       - name: 5 Login to DockerAlibaba
-        run: |
-          docker login --username=${{ secrets.ALIYUN_REGISTRY_USER }} --password=${{ secrets.ALIYUN_REGISTRY_PWD }} registry.cn-hangzhou.aliyuncs.com
+        uses: docker/login-action@v2
+        with:
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.ALIYUN_REGISTRY_USER }}
+          password: ${{ secrets.ALIYUN_REGISTRY_PWD }}
 
       - name: 6 Build and push
         uses: docker/build-push-action@v2
