@@ -37,6 +37,7 @@ jobs:
           dockerPasswd: ${{ secrets.ALIYUN_REGISTRY_PWD }}
         run: |
           ls -alh
+          ls -alh target
           echo "ALIYUN_REGISTRY_USER: $dockerName"   
           echo "ALIYUN_REGISTRY_PWD: $dockerPasswd"
           echo "HELLO_STRING 逗你玩: $HELLO_STRING"
@@ -62,12 +63,12 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
           tags: |
-            big-app:latest    
+            registry.cn-hangzhou.aliyuncs.com/mk-dev/big-app:latest    
 
-      - name: 7 Tag image for Alibaba Cloud
-        run: |
-          docker tag big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
+#      - name: 7 Tag image for Alibaba Cloud
+#        run: |
+#          docker tag big-app:latest registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
 
-      - name: 8 Push to Alibaba Cloud Container Registry
+      - name: 7 Push to Alibaba Cloud Container Registry
         run: |
           docker push registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend:latest
