@@ -1,0 +1,34 @@
+{
+  "runData": {
+    "score": {
+      "history": [
+        {
+          "scoreA": 9.44,
+          "scoreB": 2.3,
+          "scoreC": 3.56,
+          "dataDate": "2024-07-31",
+          "studentId": 730845215869767721
+        },
+        {
+          "scoreA": 3.44,
+          "scoreB": 5.3,
+          "scoreC": 6.56,
+          "dataDate": "2024-07-30",
+          "studentId": 123331231321321
+        }
+      ],
+      "student": [
+        {
+          "id": "668e58dc6338c2485aeb4591",
+          "name": "张三",
+          "customerId": 730845215869767721
+        },
+        {
+          "id": "668e58dc6338c2485aeb4591",
+          "name": "小明",
+          "customerId": 123331231321321
+        }
+      ]
+    }
+  }
+}
