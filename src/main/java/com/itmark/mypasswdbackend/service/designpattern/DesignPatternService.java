@@ -15,4 +15,9 @@ public interface DesignPatternService {
      * 破坏单例模式
      */
     void destorySingleton();
+
+    /**
+     * java中的单例案例
+     */
+    void singletonOfJava();
 }

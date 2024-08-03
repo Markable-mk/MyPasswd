@@ -62,4 +62,17 @@ public class DesignPatternServiceImpl implements DesignPatternService{
 
 
     }
+
+    @SneakyThrows
+    @Override
+    public void singletonOfJava() {
+        Runtime runtime = Runtime.getRuntime();
+        Process process = runtime.exec("ipconfig");
+        InputStream inputStream = process.getInputStream();
+        byte[] bytes = new byte[1024 * 1024 * 100];
+        // 返回读取到了 多少个字节
+        int len = inputStream.read(bytes);
+        log.info(new String(bytes,0,len,"GBK"));
+    }
+
 }
