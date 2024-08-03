@@ -10,4 +10,11 @@ public interface HuService {
      * 1 window
      */
     void window();
+
+    /**
+     * 双向查找map
+     * @param key
+     * @param value
+     */
+    void doubleMap(String key,String value);
 }
