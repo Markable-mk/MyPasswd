@@ -14,6 +14,10 @@ import java.util.Objects;
 public class SimpleCoffeeStore {
 
     public SimpleCoffee orderCoffee(String type){
+        /**
+         * 优点：对象的创建和业务代码分离
+         * 缺点：业务代码和工厂类耦合在一起，违反开闭原则
+         */
         SimpleCoffeeFactory factory =   new SimpleCoffeeFactory();
         SimpleCoffee coffee = factory.createCoffee(type);
 
