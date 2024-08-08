@@ -1,6 +1,15 @@
 A PASSWORD MANAGE SYSTEM.
 
 # 初始化
+
+## 0 基础中间件
+```shell
+ docker run -d --name my-redis  -p 16379:6379 --restart always registry.cn-hangzhou.aliyuncs.com/mk-dev/redis --requirepass "111111" --appendonly yes
+ docker run -d --name my-nacos  -p 18848:8848 --restart always -e MODE=standalone registry.cn-hangzhou.aliyuncs.com/mk-dev/nacos-server
+ docker run -d --name my-minio  --restart=always  -p 19000:9000  -p 19001:9001 -e "MINIO_ROOT_USER=minio123" -e "MINIO_ROOT_PASSWORD=minio123" -v /docker-vol/minio/data:/data  -v /docker-vol/minio/config:/root/.minio   registry.cn-hangzhou.aliyuncs.com/mk-dev/minio server /data --console-address ":9001"
+ docker run -d --name my-mysql -p 13306:3306 --restart=always -v /docker-vol/mysql/conf:/etc/mysql/conf.d -v /docker-vol/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root registry.cn-hangzhou.aliyuncs.com/mk-dev/mysql:5.7.25
+ ```
+
 ## 1 数据库创建
 ``` sql
 CREATE DATABASE my_passwd CHARACTER SET utf8 COLLATE utf8_general_ci;
