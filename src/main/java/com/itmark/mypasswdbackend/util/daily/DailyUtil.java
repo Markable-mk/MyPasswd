@@ -3,6 +3,7 @@ package com.itmark.mypasswdbackend.util.daily;
 import cn.hutool.core.map.BiMap;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 /**
  * @description:
@@ -19,4 +20,14 @@ public class DailyUtil {
         exceedTypeMap.put("2", "VOLT_OVER_LOW");
         exceedTypeMap.put("3", "VOLT_OVER_DOUBLE");
     }
+
+    /**
+     * 在传入值不为空的时候进行单位转换
+     * @param value
+     * @return
+     */
+    public static Double multiplyByThousand(Double value) {
+        return Optional.ofNullable(value).map(v -> v * 1000).orElse(null);
+    }
+
 }
