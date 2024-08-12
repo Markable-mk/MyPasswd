@@ -18,10 +18,38 @@ spec:
         app: my-passwd-backend
     spec:
       restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet
+      imagePullSecrets:
+        - name: mk-secret
       containers:
         - name: my-passwd-backend
-          image: 192.168.1.6:32500/my-passwd-backend:latest
+          image: registry.cn-hangzhou.aliyuncs.com/mk-dev/my-passwd-backend
           imagePullPolicy: Always
+          env:
+            - name: NACOS_SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: xiaoma-nacos-cm
+                  key: nacos.server.host
+            - name: NACOS_CONFIG_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: xiaoma-nacos-cm
+                  key: nacos.config.host
+            - name: NACOS_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: xiaoma-nacos-cm
+                  key: nacos.server.port
+            - name: NACOS_CONFIG_GROUP
+              valueFrom:
+                configMapKeyRef:
+                  name: xiaoma-nacos-cm
+                  key: nacos.config.group
+            - name: JAVA_OPTS
+              value: >-
+                -Xms1024m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=256m
+                -XX:MaxDirectMemorySize=512m
           resources:
             limits:
               memory: 2G
@@ -29,13 +57,6 @@ spec:
               memory: 512Mi
           ports:
             - containerPort: 8089
-          env:
-            - name: NACOS_SERVER_HOST
-              value: "xiaoma-nacos"
-            - name: NACOS_SERVER_PORT
-              value: "8848"
-            - name: NACOS_CONFIG_GROUP
-              value: "mk-common-dev"
 ---
 apiVersion: v1
 kind: Service
@@ -45,7 +66,9 @@ metadata:
 spec:
   selector:
     app: my-passwd-backend
+  type: NodePort
   ports:
     - port: 8089
       targetPort: 8089
       name: server
+      nodePort: 38089
