@@ -21,7 +21,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build().apiInfo(null);
+                .build().apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
