@@ -1,5 +1,6 @@
 package com.itmark.mypasswdbackend.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,13 +16,18 @@ import org.springframework.context.annotation.Configuration;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    @Value("${swagger.basePackage:com.itmark}")
+    private String basePackage;
+
     @Bean
-    public Docket api() {
+    public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .pathMapping("/swagger-ui.html")
+                .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
-                .build().apiInfo(apiInfo());
+                .build();
     }
 
     private ApiInfo apiInfo() {

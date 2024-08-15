@@ -74,7 +74,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             "GET /markTag/**",
             "GET /textContent/articleDateArchiveGraphBar/**",
             "GET /favicon.ico",
-            "GET /websocket/**"
+            "GET /websocket/**",
+            "GET /v2/api-docs",
+            "GET /swagger-resources",
+            "GET /swagger-ui.html",
+            "GET /webjars/**"
     );
 
     /**
@@ -82,9 +86,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
      */
     public static List<String> INVALID_URI_LIST =  Arrays.asList(
             "/stacks",
-            "/js",
             "src",
-            "html",
             "txt",
             "xml",
             "apps",
