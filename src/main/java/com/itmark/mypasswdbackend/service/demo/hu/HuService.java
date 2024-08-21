@@ -17,4 +17,9 @@ public interface HuService {
      * @param value
      */
     void doubleMap(String key,String value);
+
+    /**
+     * 日期工具类
+     */
+    void dateUtil();
 }

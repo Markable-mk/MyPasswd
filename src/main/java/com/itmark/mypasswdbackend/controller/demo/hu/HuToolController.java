@@ -25,4 +25,8 @@ public class HuToolController {
         huService.window();
     }
 
+    @GetMapping("/dateUtil")
+    public void dateUtil(){
+        huService.dateUtil();
+    }
 }
