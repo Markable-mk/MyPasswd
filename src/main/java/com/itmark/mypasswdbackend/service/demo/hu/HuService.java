@@ -22,4 +22,10 @@ public interface HuService {
      * 日期工具类
      */
     void dateUtil();
+
+    /**
+     * 系统嗲用
+     */
+    void sysUtil();
+
 }

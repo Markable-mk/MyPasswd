@@ -29,4 +29,10 @@ public class HuToolController {
     public void dateUtil(){
         huService.dateUtil();
     }
+
+    @GetMapping("/sysUtil")
+    public void sysUtil(){
+        huService.sysUtil();
+    }
+
 }
