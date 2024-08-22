@@ -103,6 +103,12 @@ public class HuServiceImpl implements HuService {
         UserInfo userInfo = SystemUtil.getUserInfo();
     }
 
+    @Override
+    public void pcUtil() {
+
+    }
+
+
     /**
      * 获取年龄
      */

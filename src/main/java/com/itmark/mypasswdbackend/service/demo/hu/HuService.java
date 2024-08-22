@@ -28,4 +28,5 @@ public interface HuService {
      */
     void sysUtil();
 
+    void pcUtil();
 }

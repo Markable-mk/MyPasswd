@@ -35,4 +35,9 @@ public class HuToolController {
         huService.sysUtil();
     }
 
+    @GetMapping("/pcUtil")
+    public void pcUtil(){
+        huService.pcUtil();
+    }
+
 }
