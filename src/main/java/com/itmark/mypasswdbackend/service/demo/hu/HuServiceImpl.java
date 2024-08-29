@@ -1,6 +1,7 @@
 package com.itmark.mypasswdbackend.service.demo.hu;
 
 import cn.hutool.core.date.*;
+import cn.hutool.core.lang.Validator;
 import cn.hutool.system.*;
 import com.itmark.mypasswdbackend.util.daily.DailyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -108,6 +109,11 @@ public class HuServiceImpl implements HuService {
 
     }
 
+    @Override
+    public boolean validatorChinese(String txt) {
+        boolean hasChinese = Validator.hasChinese(txt);
+        return hasChinese;
+    }
 
     /**
      * 获取年龄

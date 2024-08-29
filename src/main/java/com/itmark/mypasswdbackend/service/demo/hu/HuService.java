@@ -29,4 +29,9 @@ public interface HuService {
     void sysUtil();
 
     void pcUtil();
+
+    /**
+     * 验证
+     */
+    boolean validatorChinese(String txt);
 }
