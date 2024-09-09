@@ -51,4 +51,9 @@ public class HuToolController {
         return huService.validatorChinese(txt);
     }
 
+
+    @GetMapping("/convert")
+    public void convertUtil(){
+        huService.convertUtil();
+    }
 }

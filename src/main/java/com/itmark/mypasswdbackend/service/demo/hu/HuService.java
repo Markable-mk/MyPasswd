@@ -34,4 +34,6 @@ public interface HuService {
      * 验证
      */
     boolean validatorChinese(String txt);
+
+    void convertUtil();
 }

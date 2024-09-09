@@ -1,7 +1,9 @@
 package com.itmark.mypasswdbackend.service.demo.hu;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.*;
 import cn.hutool.core.lang.Validator;
+import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.system.*;
 import com.itmark.mypasswdbackend.util.daily.DailyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -253,4 +255,34 @@ public class HuServiceImpl implements HuService {
         Date date3 = DateUtil.date(System.currentTimeMillis());
     }
 
+
+    @Override
+    public void convertUtil() {
+        // 转换为字符串：
+        int a = 1;
+        //aStr为"1"
+        String aStr = Convert.toStr(a);
+
+        long[] b = {1,2,3,4,5};
+        //bStr为："[1, 2, 3, 4, 5]"
+        String bStr = Convert.toStr(b);
+        // 转换为指定类型数组：
+        String[] b2 = { "1", "2", "3", "4" };
+        //结果为Integer数组
+        Integer[] intArray = Convert.toIntArray(b);
+
+        long[] c = {1,2,3,4,5};
+        //结果为Integer数组
+        Integer[] intArray2 = Convert.toIntArray(c);
+
+        // 转16进制加密
+        String txt = "我是一个小小的可爱的字符串";
+
+        //结果："e68891e698afe4b880e4b8aae5b08fe5b08fe79a84e58fafe788b1e79a84e5ad97e7aca6e4b8b2"
+        String hex = Convert.toHex(txt, CharsetUtil.CHARSET_UTF_8);
+
+        //结果为："我是一个小小的可爱的字符串"
+        //注意：在4.1.11之后hexStrToStr将改名为hexToStr
+        String raw2 = Convert.hexToStr(hex, CharsetUtil.CHARSET_UTF_8);
+    }
 }
