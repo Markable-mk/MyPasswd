@@ -26,6 +26,7 @@
         <lombok.version>1.18.16</lombok.version>
         <liteflow.version>2.12.1</liteflow.version>
         <socketio.version>1.7.19</socketio.version>
+        <guava.version>28.1-jre</guava.version>
     </properties>
     <dependencies>
         <dependency>
@@ -312,6 +313,22 @@
             <artifactId>commons-codec</artifactId>
             <version>1.11</version>
         </dependency>
+        <!-- google的 guava jar -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.spark</groupId>-->
+<!--            <artifactId>spark-core_2.12</artifactId>-->
+<!--            <version>3.5.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.spark</groupId>-->
+<!--            <artifactId>spark-sql_2.12</artifactId>-->
+<!--            <version>3.5.2</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
