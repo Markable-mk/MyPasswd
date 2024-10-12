@@ -3,6 +3,7 @@ package com.itmark.mypasswdbackend.service.demo.hu;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.*;
 import cn.hutool.core.lang.Validator;
+import cn.hutool.core.text.StrFormatter;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.system.*;
 import com.itmark.mypasswdbackend.util.daily.DailyUtil;
@@ -284,5 +285,15 @@ public class HuServiceImpl implements HuService {
         //结果为："我是一个小小的可爱的字符串"
         //注意：在4.1.11之后hexStrToStr将改名为hexToStr
         String raw2 = Convert.hexToStr(hex, CharsetUtil.CHARSET_UTF_8);
+    }
+
+    public void strFormat (){
+        //通常使用
+        String result1 = StrFormatter.format("this is {} for {}", "a", "b");
+
+        String result2 = StrFormatter.format("this is \\{} for {}", "a", "b");
+
+        String result3 = StrFormatter.format("this is \\\\{} for {}", "a", "b");
+
     }
 }
