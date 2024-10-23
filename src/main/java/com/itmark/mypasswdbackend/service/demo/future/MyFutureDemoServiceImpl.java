@@ -2,9 +2,7 @@ package com.itmark.mypasswdbackend.service.demo.future;
 
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @description:
@@ -32,6 +30,30 @@ public class MyFutureDemoServiceImpl implements MyFutureDemoService{
             System.out.println("执行step 3");
             return "step3 result";
         }).thenAccept(System.out::println);
+    }
+
+    @Override
+    public void demoTwo() {
+         CompletableFuture<Void> runAsyncEnd = CompletableFuture.runAsync(() -> {
+             try {
+                 TimeUnit.MILLISECONDS.sleep(500);
+             } catch (InterruptedException e) {
+                 throw new RuntimeException(e);
+             }
+             System.out.println("runAsync end");
+        });
+         Void unused = runAsyncEnd.getNow(null);
+         CompletableFuture<String> supplyAsyncEnd = CompletableFuture.supplyAsync(() -> {
+            System.out.println("supplyAsync end");
+            return "complete";
+        });
+        try {
+            String supplyResult = supplyAsyncEnd.get();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

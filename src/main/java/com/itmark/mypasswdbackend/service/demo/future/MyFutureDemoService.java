@@ -7,4 +7,5 @@ package com.itmark.mypasswdbackend.service.demo.future;
  */
 public interface MyFutureDemoService {
     void demoOne();
+    void demoTwo();
 }
