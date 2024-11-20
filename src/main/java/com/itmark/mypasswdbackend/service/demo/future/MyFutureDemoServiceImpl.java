@@ -1,18 +1,24 @@
 package com.itmark.mypasswdbackend.service.demo.future;
 
 import cn.hutool.core.util.NumberUtil;
+import com.itmark.mypasswdbackend.entity.futu.FutureEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @description:
  * @author: MAKUAN
  * @date: 2024/8/12 16:41
  */
+
+@Slf4j
 @Service
 public class MyFutureDemoServiceImpl implements MyFutureDemoService{
     ExecutorService executor = Executors.newFixedThreadPool(5);
@@ -101,4 +107,42 @@ public class MyFutureDemoServiceImpl implements MyFutureDemoService{
         CompletableFuture.allOf(futures).join();
     }
 
+
+    @Override
+    public void demoFour(List<String> idList) {
+        // 1 定义异步任务队列用于收集结果
+        CopyOnWriteArrayList<CompletableFuture<FutureEntity>> resultFutureList = new CopyOnWriteArrayList<>();
+        // 2 执行任务
+        for (String idString : idList) {
+            CompletableFuture<FutureEntity> completableFutureAffectNodeResultTask = CompletableFuture.supplyAsync(
+                    () -> futureCalcUnit(idString),
+                    executor
+            ).exceptionally((e) -> {
+                log.error("计算任务出现异常：{}",e.getMessage());
+                return null;
+            });
+            // 3 每一个任务加入队列
+            resultFutureList.add(completableFutureAffectNodeResultTask);
+        }
+        // 4 阻塞等待任务执行完毕
+        CompletableFuture.allOf(resultFutureList.toArray(new CompletableFuture[]{})).join();
+        // 5 收集结果
+        List<FutureEntity> collectResult = resultFutureList.stream().map(item -> {
+            try {
+                return item.get();
+            } catch (Exception e) {
+                log.error("计算任务出现异常：{}",e.getMessage());
+                return null;
+            }
+        }).filter(item -> !Objects.isNull(item)).collect(Collectors.toList());
+    }
+
+    /**
+     * 计算任务单元
+     * @param id
+     * @return
+     */
+    public FutureEntity futureCalcUnit(String id){
+        return new FutureEntity(id,id);
+    }
 }

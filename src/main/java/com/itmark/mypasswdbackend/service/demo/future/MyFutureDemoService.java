@@ -11,4 +11,5 @@ public interface MyFutureDemoService {
     void demoOne();
     void demoTwo();
     void demoThree(List<String> idList);
+    void demoFour(List<String> idList);
 }
