@@ -1,5 +1,7 @@
 package com.itmark.mypasswdbackend.service.demo.future;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: MAKUAN
@@ -8,4 +10,5 @@ package com.itmark.mypasswdbackend.service.demo.future;
 public interface MyFutureDemoService {
     void demoOne();
     void demoTwo();
+    void demoThree(List<String> idList);
 }

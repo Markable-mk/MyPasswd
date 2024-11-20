@@ -1,7 +1,11 @@
 package com.itmark.mypasswdbackend.service.demo.future;
 
+import cn.hutool.core.util.NumberUtil;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 /**
@@ -12,6 +16,8 @@ import java.util.concurrent.*;
 @Service
 public class MyFutureDemoServiceImpl implements MyFutureDemoService{
     ExecutorService executor = Executors.newFixedThreadPool(5);
+    @Resource(name = "executorPool")
+    private ThreadPoolExecutor executorPool;
 
     @Override
     public void demoOne() {
@@ -54,6 +60,45 @@ public class MyFutureDemoServiceImpl implements MyFutureDemoService{
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void demoThree(List<String> idList) {
+        List<String> threadExecuteIdList = new ArrayList<>();
+        for(int i=0;i<idList.size();i++){
+            threadExecuteIdList.add(idList.get(i) + "_" + i);
+            if(threadExecuteIdList.size() > 200){
+                this.futureCalc(threadExecuteIdList);
+                threadExecuteIdList = new ArrayList<>();
+            }else if(i == (idList.size()-1)){
+                this.futureCalc(threadExecuteIdList);
+            }
+        }
+    }
+
+    void futureCalc(List<String> idList){
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>(idList);
+        int maximumPoolSize = executorPool.getMaximumPoolSize();
+        CompletableFuture<?>[] futures = new CompletableFuture[maximumPoolSize];
+        for (int i = 0; i < maximumPoolSize; i++) {
+            futures[i] = CompletableFuture.runAsync(() -> {
+                while (true) {
+                    String id;
+                    try {
+                        id = queue.poll(10, TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (id == null && queue.isEmpty()) {
+                        break;
+                    }
+                    if (id != null) {
+                        // 调用方法
+                    }
+                }
+            }, executorPool);
+        }
+        CompletableFuture.allOf(futures).join();
     }
 
 }
